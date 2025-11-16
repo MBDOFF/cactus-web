@@ -46,24 +46,28 @@ lock = threading.Lock()
 PRINT_COOLDOWN = 0.5
 last_print_time = time.time()
 
-TRAFFIC_LIGHT_API_URL = "http://cactus:8014/api/set"
+TRAFFIC_LIGHT_API_URL = "http://localhost:8014/control"
 
-def send_traffic_light_command(light_type, value):
+PIN_CAR_RED = 8
+PIN_CAR_GREEN = 9
+PIN_PEDESTRIAN = 10
+
+def send_traffic_light_command(pin, value):
     """Trimite comenzi către API-ul semaforului fizic.
     
     Args:
-        light_type: "car" sau "pedestrian"
-        value: "red", "yellow" sau "green"
+        pin: Numărul pin-ului (8 pentru car red, 9 pentru car green, 10 pentru pedestrian)
+        value: 0 sau 1 (0=OFF, 1=ON)
     """
     try:
         response = requests.post(
             TRAFFIC_LIGHT_API_URL,
-            json={"type": light_type, "value": value},
+            json={"pin": pin, "value": value},
             headers={"Content-Type": "application/json"},
             timeout=2
         )
         if response.status_code == 200:
-            print(f"✓ Comandă trimisă către semafor: {light_type} -> {value}")
+            print(f"✓ Comandă trimisă către semafor: pin {pin} -> {value}")
         else:
             print(f"⚠ Eroare la trimiterea comenzii către semafor: {response.status_code}")
     except Exception as e:
@@ -89,16 +93,26 @@ def update_traffic_lights_physical(intersection_type, lights_state, previous_lig
         if car_light == prev_car_light and ped_light == prev_ped_light:
             return
     
-    color_map = {0: "red", 1: "green", 2: "yellow"}
+    # Actualizează semaforul pentru mașini
+    if car_light == 0:  # Red
+        send_traffic_light_command(PIN_CAR_RED, 0)  # Roșu ON (pin 8, value 0)
+        send_traffic_light_command(PIN_CAR_GREEN, 0)  # Verde OFF (pin 9, value 0)
+    elif car_light == 1:  # Green
+        send_traffic_light_command(PIN_CAR_RED, 1)  # Roșu OFF (pin 8, value 1)
+        send_traffic_light_command(PIN_CAR_GREEN, 1)  # Verde ON (pin 9, value 1)
+    elif car_light == 2:  # Yellow
+        # Pentru galben, probabil trebuie să setăm ambele sau un pin special
+        # Presupunem că galben = roșu ON + verde OFF (sau alt pin pentru galben)
+        send_traffic_light_command(PIN_CAR_RED, 0)  # Roșu ON (pin 8, value 0)
+        send_traffic_light_command(PIN_CAR_GREEN, 0)  # Verde OFF (pin 9, value 0)
     
-    if car_light in color_map:
-        send_traffic_light_command("car", color_map[car_light])
-    
-    if ped_light in color_map:
-        if ped_light == 2:
-            send_traffic_light_command("pedestrian", "red")
-        else:
-            send_traffic_light_command("pedestrian", color_map[ped_light])
+    # Actualizează semaforul pentru pietoni
+    if ped_light == 0:  # Red
+        send_traffic_light_command(PIN_PEDESTRIAN, 0)  # Verde OFF (roșu)
+    elif ped_light == 1:  # Green
+        send_traffic_light_command(PIN_PEDESTRIAN, 1)  # Verde ON
+    elif ped_light == 2:  # Yellow (nu există pentru pietoni, dar dacă apare, tratează ca roșu)
+        send_traffic_light_command(PIN_PEDESTRIAN, 0)  # Verde OFF (roșu)
 
 # --- Funcții pentru gestionarea intersecțiilor ---
 
