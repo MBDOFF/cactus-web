@@ -1,0 +1,110 @@
+{
+  "intersections": [
+    {
+      "id": "depou-001",
+      "name": "Depou Big",
+      "type": "car_pedestrian",
+      "cameraIndex": 1,
+      "lights": [
+        {
+          "id": 0,
+          "type": "car",
+          "name": "Vehicule"
+        },
+        {
+          "id": 1,
+          "type": "pedestrian",
+          "name": "Pietoni"
+        }
+      ],
+      "settings": {
+        "mode": "Automatic",
+        "greenLinePreference": "Car",
+        "carGreenTime": 15,
+        "pedGreenTime": 10,
+        "yellowTime": 3,
+        "allRedSafetyTime": 2
+      },
+      "state": {
+        "phase": "CAR_GREEN",
+        "lights": [
+          1,
+          0
+        ],
+        "timer": {
+          "for": "car",
+          "value": 999
+        },
+        "lastUpdate": 1763218840.8776991,
+        "previousMode": null,
+        "_fromVehicleDetection": false,
+        "_fromOppositeDetection": false
+      }
+    },
+    {
+      "id": "depou-002",
+      "name": "Depou Small",
+      "type": "car_car",
+      "cameraIndex": 0,
+      "lights": [
+        {
+          "id": 0,
+          "type": "car",
+          "name": "Vehicule Nord-Sud",
+          "zones": [
+            1,
+            2
+          ],
+          "customZones": [
+            {
+              "height": 142.7027027027027,
+              "width": 281,
+              "x": 31.5,
+              "y": 66.86070686070687
+            }
+          ]
+        },
+        {
+          "id": 1,
+          "type": "car",
+          "name": "Vehicule Est-Vest",
+          "zones": [
+            3,
+            4
+          ],
+          "customZones": [
+            {
+              "x": 25.5,
+              "y": 266.44490644490645,
+              "width": 271,
+              "height": 124.74012474012477
+            }
+          ]
+        }
+      ],
+      "settings": {
+        "mode": "Automatic",
+        "greenLinePreference": "0",
+        "carGreenTime": 20,
+        "pedGreenTime": 10,
+        "yellowTime": 3,
+        "allRedSafetyTime": 2
+      },
+      "state": {
+        "phase": "LIGHT_0_GREEN",
+        "lights": [
+          1,
+          0
+        ],
+        "timer": {
+          "for": "light_0",
+          "value": 999
+        },
+        "lastUpdate": null,
+        "previousMode": null,
+        "_fromVehicleDetection": false,
+        "_fromOppositeDetection": false
+      }
+    }
+  ]
+}
