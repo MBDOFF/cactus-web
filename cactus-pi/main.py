@@ -46,7 +46,7 @@ lock = threading.Lock()
 PRINT_COOLDOWN = 0.5
 last_print_time = time.time()
 
-TRAFFIC_LIGHT_API_URL = "http://localhost:8014/control"
+TRAFFIC_LIGHT_API_URL = "http://cactus:8014/control"
 
 PIN_CAR_RED = 8
 PIN_CAR_GREEN = 9

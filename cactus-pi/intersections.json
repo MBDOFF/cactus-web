@@ -4,7 +4,7 @@
       "id": "depou-001",
       "name": "Depou Big",
       "type": "car_pedestrian",
-      "cameraIndex": 1,
+      "cameraIndex": 0,
       "lights": [
         {
           "id": 0,
