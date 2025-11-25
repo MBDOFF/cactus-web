@@ -28,14 +28,14 @@
       "state": {
         "phase": "CAR_GREEN",
         "lights": [
-          1,
-          0
+          0,
+          1
         ],
         "timer": {
           "for": "car",
           "value": 999
         },
-        "lastUpdate": 1763218840.8776991,
+        "lastUpdate": 1763307364.580492,
         "previousMode": null,
         "_fromVehicleDetection": false,
         "_fromOppositeDetection": false

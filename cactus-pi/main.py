@@ -112,7 +112,7 @@ def update_traffic_lights_physical(intersection_type, lights_state, previous_lig
     elif ped_light == 1:  # Green
         send_traffic_light_command(PIN_PEDESTRIAN, 1)  # Verde ON
     elif ped_light == 2:  # Yellow (nu există pentru pietoni, dar dacă apare, tratează ca roșu)
-        send_traffic_light_command(PIN_PEDESTRIAN, 0)  # Verde OFF (roșu)
+        send_traffic_light_command(PIN_PEDESTRIAN, 1)  # Verde OFF (roșu)
 
 # --- Funcții pentru gestionarea intersecțiilor ---
 

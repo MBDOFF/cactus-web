@@ -1643,7 +1643,7 @@ const TrafficDashboard = () => {
                   
                   {/* Traffic Lights Overlay - Top Right */}
                   <div className="absolute top-4 right-4 rounded-xl z-40 overflow-hidden">
-                    <div className="flex gap-0 p-2">
+                    <div className="flex flex-row-reverse gap-0 p-2">
                       {/* Car Traffic Light */}
                       <div className="flex flex-col items-center">
                         <div className="flex items-center gap-1.5 mb-1.5">
@@ -2049,7 +2049,7 @@ const ControlPage = () => {
               {/* Traffic Lights Overlay - Top Right */}
               {selectedIntersection && (
                 <div className="absolute top-4 right-4 z-40 overflow-hidden">
-                  <div className="flex gap-2 p-2">
+                  <div className="flex flex-row-reverse gap-2 p-2">
                     {isCarCar ? (
                       <>
                         {/* Light 0 Traffic Light */}
